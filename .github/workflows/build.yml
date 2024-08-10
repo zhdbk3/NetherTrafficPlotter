@@ -19,7 +19,7 @@ jobs:
       - name: 签出存储库
         uses: actions/checkout@v4
 
-      - name: 设置Python
+      - name: 设置 Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11' # Version range or exact version of a Python version to use, using SemVer's version range syntax
@@ -44,7 +44,7 @@ jobs:
           product-version: ${{ github.event.inputs.version }}
           file-description: 地狱交通绘图仪
           copyright: "Copyright MC着火的冰块. All right reserved."
-          enable-plugins: pyqt5, matplotlib
+          enable-plugins: pyqt5,matplotlib
           disable-console: true
           macos-create-app-bundle: true
 
