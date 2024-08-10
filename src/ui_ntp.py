@@ -140,7 +140,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "地狱交通绘图器"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "地狱交通绘图仪"))
         self.label_5.setText(_translate("MainWindow", "线路类型"))
         self.comboBox_way_type.setItemText(0, _translate("MainWindow", "铁路"))
         self.comboBox_way_type.setItemText(1, _translate("MainWindow", "冰道"))

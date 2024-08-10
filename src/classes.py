@@ -66,7 +66,7 @@ class NetherTraffic:
 
     def node_named(self, name: str) -> NodeBase:
         """
-        获取指定名字的节点对象，若没有则报错
+        获取指定名字的节点对象
         :param name: 节点名字
         :return: 节点对象
         """
