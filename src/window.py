@@ -30,6 +30,7 @@ class Window(QMainWindow, Ui_MainWindow):
         self.action_save.triggered.connect(self.save_data)
         self.action_open.triggered.connect(self.load_data)
         self.pushButton_save_img.clicked.connect(self.save_img)
+        self.pushButton_rename_node.clicked.connect(self.rename_node)
 
     def plot(self) -> None:
         """根据已有信息绘制图像"""
@@ -68,7 +69,7 @@ class Window(QMainWindow, Ui_MainWindow):
 
     def update_combo_boxes(self):
         """节点变化，更新选择框"""
-        for box in (self.comboBox_node1, self.comboBox_node2, self.comboBox_node_to_remove):
+        for box in (self.comboBox_node1, self.comboBox_node2, self.comboBox_selected_node):
             box.clear()
             box.addItems([node.name for node in self.traffic.nodes])
 
@@ -85,7 +86,7 @@ class Window(QMainWindow, Ui_MainWindow):
 
     def remove_node(self) -> None:
         """删除节点及其线路"""
-        name = self.comboBox_node_to_remove.currentText()
+        name = self.comboBox_selected_node.currentText()
         self.traffic.remove_node(name)
         self.plot()
         self.update_combo_boxes()
@@ -108,13 +109,13 @@ class Window(QMainWindow, Ui_MainWindow):
 
     def save_data(self) -> None:
         """保存数据至本地"""
-        path = QFileDialog.getSaveFileName(self, '保存数据', '', 'Python 序列化文件 (*.pickle)')[0]
+        path = QFileDialog.getSaveFileName(self, '保存数据', '', 'Python 序列化文件 (*.ntp.pickle)')[0]
         if path:
             self.traffic.save(path)
 
     def load_data(self) -> None:
         """从本地加载数据"""
-        path = QFileDialog.getOpenFileName(self, '加载数据', '', 'Python 序列化文件 (*.pickle)')[0]
+        path = QFileDialog.getOpenFileName(self, '加载数据', '', 'Python 序列化文件 (*.ntp.pickle)')[0]
         if path:
             self.traffic = NetherTraffic.load(path)
             self.plot()
@@ -125,3 +126,11 @@ class Window(QMainWindow, Ui_MainWindow):
         path = QFileDialog.getSaveFileName(self, '保存图像', '', 'PNG 图片 (*.png)')[0]
         if path:
             self.figure.fig.savefig(path)
+
+    def rename_node(self) -> None:
+        """重命名节点"""
+        old_name = self.comboBox_selected_node.currentText()
+        new_name = self.lineEdit_new_name.text()
+        self.traffic.rename_node(old_name, new_name)
+        self.plot()
+        self.update_combo_boxes()

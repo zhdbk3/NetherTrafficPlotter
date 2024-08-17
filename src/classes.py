@@ -108,6 +108,11 @@ class NetherTraffic:
         with open(path, 'rb') as f:
             return pickle.load(f)
 
+    def rename_node(self, old_name: str, new_name: str) -> None:
+        """重命名节点"""
+        node = self.node_named(old_name)
+        node.name = new_name
+
 
 type_named: dict[str, type] = {
     '地狱门': NetherPortal, '分叉点': BifurcationPoint,
