@@ -31,9 +31,16 @@ class Window(QMainWindow, Ui_MainWindow):
         self.action_open.triggered.connect(self.load_data)
         self.pushButton_save_img.clicked.connect(self.save_img)
         self.pushButton_rename_node.clicked.connect(self.rename_node)
+        self.lineEdit_width.editingFinished.connect(self.plot)
+        self.lineEdit_height.editingFinished.connect(self.plot)
 
     def plot(self) -> None:
         """根据已有信息绘制图像"""
+        # 设置图像尺寸
+        width = int(self.lineEdit_width.text())
+        height = int(self.lineEdit_height.text())
+        self.figure.setFixedSize(width, height)
+
         # 清除原有的图像
         axes = self.figure.axes
         axes.clear()
